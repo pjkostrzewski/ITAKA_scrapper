@@ -1,20 +1,32 @@
 import requests
 from bs4 import BeautifulSoup
-from random import shuffle
+from random import choice
 
 
 class Proxy(object):
     proxies_url = "https://free-proxy-list.net/"
+    httpbin_url = "https://httpbin.org/ip"
 
     def __init__(self):
         self.proxies = self._get_possible_proxies_from_website()
+        self.attempts = 10
 
     def get_proxy(self):
-        for proxy in self.proxies:
+        for _ in range(self.attempts):
+            proxy = choice(tuple(self.proxies))
             try:
-                response = requests.get('https://httpbin.org/ip', proxies={"http": f"http://{proxy}", "https": f"http://{proxy}"}, timeout=3)
+                response = requests.get(
+                    self.httpbin_url, 
+                    proxies={"http": f"http://{proxy}","https": f"http://{proxy}"},
+                    timeout=3
+                    )
                 return proxy
-            except: pass
+            except: 
+                print(proxy, "not connected.")
+
+    def set_number_of_attempts(self, attempts: int): 
+        assert 0 < attempts <= 20
+        self.attempts = attempts
 
     def _get_possible_proxies_from_website(self):
         proxies = set()
