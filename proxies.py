@@ -8,10 +8,11 @@ class Proxy(object):
     httpbin_url = "https://httpbin.org/ip"
 
     def __init__(self):
-        self.proxies = self._get_possible_proxies_from_website()
         self.attempts = 10
+        self.proxies = self._get_possible_proxies_from_website()
 
-    def get_proxy(self):
+    def get(self):
+        print(len(self.proxies))
         for _ in range(self.attempts):
             proxy = choice(tuple(self.proxies))
             try:
