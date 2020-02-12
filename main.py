@@ -30,10 +30,23 @@ https://www.itaka.pl/last-minute/
 &currency=PLN
 '''
 url = 'https://www.itaka.pl/last-minute/?departureDate={departure_date}&view=offerList&package-type=wczasy&adults=2&date-from={date_from}&promo=lastMinute&order=dateFromAsc&total-price=0&page=1&transport=bus%2Cflight&currency=PLN'
-url = url.format(departure_date=get_date_with_timedelta(days=2), date_from=get_today_date())
+url = url.format(departure_date=get_date_with_timedelta(days=1), date_from=get_today_date())
 print(url)
+# proxy = Proxy().get()
+# print("connected", proxy)
+# response = requests.get(url=url, proxies={"http": f"http://{proxy}","https": f"http://{proxy}"}).text
 response = requests.get(url=url).text
 soup = BeautifulSoup(response, "html.parser")
+article = soup.find_all('article', {'class': "offer clearfix"})
+for offer in article:
+    try:
+        tag = offer.find('span', class_='old-price_value').get_text()
+    except:
+        tag = None
+    current_price_value = offer.find('span', class_='current-price_value').get_text()
+    hotel_rank = offer.find('span', class_='hotel-rank').get_text()
+    link = offer.find('a', {'class': 'offer_link pull-right'}).get('href')
+    print(tag, current_price_value, hotel_rank, link)
 # tag = soup.find('span', class_='old-price_value')
 # current_price_value = soup.find('span', class_='current-price_value').get_text()
 # hotel_rank = soup.find('span', class_='hotel-rank').get_text()

@@ -8,7 +8,7 @@ class Proxy(object):
     httpbin_url = "https://httpbin.org/ip"
 
     def __init__(self):
-        self.attempts = 10
+        self.attempts = 20
         self.proxies = self._get_possible_proxies_from_website()
 
     def get(self):
