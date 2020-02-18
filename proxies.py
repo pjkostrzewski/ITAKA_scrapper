@@ -12,18 +12,18 @@ class Proxy(object):
         self.proxies = self._get_possible_proxies_from_website()
 
     def get(self):
-        print(len(self.proxies))
+        print("looking for proxy connection. attempts {}".format(self.attempts))
         for _ in range(self.attempts):
             proxy = choice(tuple(self.proxies))
             try:
-                response = requests.get(
-                    self.httpbin_url, 
+                requests.get(
+                    url=self.httpbin_url, 
                     proxies={"http": f"http://{proxy}","https": f"http://{proxy}"},
                     timeout=3
                     )
                 return proxy
-            except: 
-                print(proxy, "not connected.")
+            except: pass
+        raise Exception("proxy connection not established.")
 
     def set_number_of_attempts(self, attempts: int): 
         assert 0 < attempts <= 20

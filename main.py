@@ -35,16 +35,19 @@ https://www.itaka.pl/last-minute/
 '''
 url = 'https://www.itaka.pl/last-minute/?departureDate={departure_date}&view=offerList&package-type=wczasy&adults=2&date-from={date_from}&promo=lastMinute&order=dateFromAsc&total-price=0&page=1&transport=bus%2Cflight&currency=PLN'
 url = url.format(departure_date=get_date_with_timedelta(days=1), date_from=get_today_date())
-print(url)
-# proxy = Proxy().get()
-# print("connected", proxy)
-# response = requests.get(url=url, proxies={"http": f"http://{proxy}","https": f"http://{proxy}"}).text
-user_agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36'
 
-headers = { 'User-Agent' : user_agent }
-response = requests.get(url=url, headers=headers).text
+proxy = Proxy().get()
+print("connected", proxy)
+
+user_agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36'
+headers = {'User-Agent': user_agent}
+response = requests.get(url=url,
+                        headers=headers, 
+                        proxies={"http": f"http://{proxy}","https": f"http://{proxy}"}).text
 soup = BeautifulSoup(response, "html.parser")
 article = soup.find_all('article', {'class': "offer clearfix"})
+assert len(article) > 0, "no offers found."
+
 for offer in article:
     try:
         tag = offer.find('span', class_='old-price_value').get_text()
