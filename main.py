@@ -1,5 +1,6 @@
 from proxies import Proxy
 import requests
+from requests.exceptions import ProxyError
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 import re
@@ -41,14 +42,21 @@ print("connected", proxy)
 
 user_agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36'
 headers = {'User-Agent': user_agent}
-response = requests.get(url=url,
-                        headers=headers, 
-                        proxies={"http": f"http://{proxy}","https": f"http://{proxy}"}).text
+try:
+    response = requests.get(url=url,
+                            headers=headers, 
+                            proxies={"http": f"http://{proxy}","https": f"http://{proxy}"}).text
+except ProxyError as e:
+    print(e)
+    response = requests.get(url=url,
+                            headers=headers).text
+
 soup = BeautifulSoup(response, "html.parser")
 article = soup.find_all('article', {'class': "offer clearfix"})
 assert len(article) > 0, "no offers found."
 
 for offer in article:
+    print(type(offer))
     try:
         tag = offer.find('span', class_='old-price_value').get_text()
     except:
@@ -61,6 +69,7 @@ for offer in article:
     print(get_offer_id_from_url(link))
     print()
 
+print(f"FOUND {len(article)} OFFERS")
 # gen2 = (x.get_text() for x in soup.find_all('span', class_='old-price_value')[::2])  # more pythonic way to generate all current offers
 
 # <img src="https://i.content4travel.com/cms/img/u/desktop/seres/rktvile_0.jpg" class="figure_main-photo" alt="Hotel The Village by Rotana">
