@@ -4,6 +4,8 @@ from requests.exceptions import ProxyError
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 import re
+from Offer import Offer
+from OfferParser import OfferParser
 
 
 def get_today_date():
@@ -56,18 +58,20 @@ article = soup.find_all('article', {'class': "offer clearfix"})
 assert len(article) > 0, "no offers found."
 
 for offer in article:
-    print(type(offer))
-    try:
-        tag = offer.find('span', class_='old-price_value').get_text()
-    except:
-        tag = None
-    current_price_value = offer.find('span', class_='current-price_value').get_text()
-    hotel_rank = offer.find('span', class_='hotel-rank').get_text()
-    link = offer.find('a', {'class': 'offer_link pull-right'}).get('href')
-    print(tag, current_price_value, hotel_rank)
-    print(link)
-    print(get_offer_id_from_url(link))
-    print()
+    a = OfferParser(offer)
+    print(a.get_as_dict())
+    # print(type(offer))
+    # try:
+    #     tag = offer.find('span', class_='old-price_value').get_text()
+    # except:
+    #     tag = None
+    # current_price_value = offer.find('span', class_='current-price_value').get_text()
+    # hotel_rank = offer.find('span', class_='hotel-rank').get_text()
+    # link = offer.find('a', {'class': 'offer_link pull-right'}).get('href')
+    # print(tag, current_price_value, hotel_rank)
+    # print(link)
+    # print(get_offer_id_from_url(link))
+    # print()
 
 print(f"FOUND {len(article)} OFFERS")
 # gen2 = (x.get_text() for x in soup.find_all('span', class_='old-price_value')[::2])  # more pythonic way to generate all current offers
