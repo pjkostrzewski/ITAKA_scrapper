@@ -9,7 +9,19 @@ class Offer(object):
         self.rank = rank
         self.link = link
         self.reduction = self._calculate_reduction()
-        self.number_of_offers += 1
+        self.percentage = self._calculate_percentage()
+        self.destination = self._get_destination()
+        Offer.number_of_offers += 1
     
-    def _calculate_reduction(self):
+    def __str__(self):
+        return "{}zł -> {}zł  (-{}%)  |  {}  |  {}".format(self.old_price, self.current_price, self.percentage, self.rank, self.destination)
+    
+    def _calculate_reduction(self) -> int:
         return self.old_price - self.current_price if self.old_price else 0
+
+    def _calculate_percentage(self) -> int:
+        ratio = self.current_price / self.old_price
+        return int((1 - ratio) * 100)
+    
+    def _get_destination(self) -> str:
+        return self.link.split("/")[2].replace("-", " ").title()

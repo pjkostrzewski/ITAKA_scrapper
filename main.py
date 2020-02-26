@@ -57,17 +57,14 @@ soup = BeautifulSoup(response, "html.parser")
 article = soup.find_all('article', {'class': "offer clearfix"})
 assert len(article) > 0, "no offers found."
 
+offers = list()  # offers container
 for offer in article:
     parsed = OfferParser(offer).get_as_dict()
-    offer = Offer(**parsed)
-    print(offer.link)
-    print(offer.offer_id)
-    print(offer.old_price)
-    print(offer.current_price)
-    print(offer.reduction)
-    print(offer.rank)
+    offers.append(Offer(**parsed))
 
-print(f"FOUND {len(article)} OFFERS")
-print(Offer.number_of_offers)
+for offer in offers:
+    print(offer)
+
+print(f"FOUND {Offer.number_of_offers} OFFERS")
 # <img src="https://i.content4travel.com/cms/img/u/desktop/seres/rktvile_0.jpg" class="figure_main-photo" alt="Hotel The Village by Rotana">
 # to get picture ^^
