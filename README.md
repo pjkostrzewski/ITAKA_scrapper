@@ -26,4 +26,4 @@ best last minute offers from itaka website.
 4239zł -> 2689zł  (-36%)  |  4.7  |  Wyspy Kanaryjskie\
 4549zł -> 2699zł  (-40%)  |  5.3  |  Wyspy Kanaryjskie\
 4749zł -> 2699zł  (-43%)  |  4.8  |  Wyspy Kanaryjskie\
-4089zł -> 2749zł  (-32%)  |  5.6  |  Egipt\
+4089zł -> 2749zł  (-32%)  |  5.6  |  Egipt
