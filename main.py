@@ -1,9 +1,9 @@
-from proxies import Proxy
 import requests
 from requests.exceptions import ProxyError
 from bs4 import BeautifulSoup
-
 import re
+
+from proxies import Proxy
 from Offer import Offer
 from OfferParser import OfferParser
 from helpers import (url, user_agent,
