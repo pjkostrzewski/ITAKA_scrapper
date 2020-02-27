@@ -9,31 +9,37 @@ class OfferParser(object):
     
     def get_old_price(self):
         try:
-            price = self.offer.find('span', class_='old-price_value').get_text()
+            price = self.offer.find('span', 
+                                    class_='old-price_value').get_text()
             return int(re.findall(r'(.*) PLN\/os', price)[0].replace(" ", ""))
         except:
             return None
         
     def get_current_price(self):
         try:
-            price = self.offer.find('span', class_='current-price_value').get_text()
+            price = self.offer.find('span', 
+                                    class_='current-price_value').get_text()
             return int(re.findall(r'(.*)PLN \/ os', price)[0].replace(" ", ""))
         except Exception as e:
             print(e)
             return None
     
     def get_hotel_rank(self):
-        return float(self.offer.find('span', class_='hotel-rank').get_text())
+        return float(self.offer.find('span', 
+                                     class_='hotel-rank').get_text())
     
     def get_url(self):
-        return self.offer.find('a', {'class': 'offer_link pull-right'}).get('href')
+        return self.offer.find('a', 
+                               {'class': 'offer_link pull-right'}).get('href')
     
     def get_offer_id(self):
         url = self.get_url()
         return re.findall(pattern=r".*ofr_id=(.{64})&.*", string=url)[0]
     
     def get_picture(self):
-        return self.offer.find("img", {'class': "figure_main-photo"}).get('src')
+        # return self.offer.find("img", 
+        #                        {'class': "figure_main-photo"}).get('src')  // TODO
+        return "picture handler"
     
     def get_as_dict(self):
         result = {
