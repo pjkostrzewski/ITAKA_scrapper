@@ -32,12 +32,16 @@ class OfferParser(object):
         url = self.get_url()
         return re.findall(pattern=r".*ofr_id=(.{64})&.*", string=url)[0]
     
+    def get_picture(self):
+        return self.offer.find("img", {'class': "figure_main-photo"}).get('src')
+    
     def get_as_dict(self):
         result = {
             "old_price": self.get_old_price(),
             "current_price": self.get_current_price(),
             "rank": self.get_hotel_rank(),
             "link": self.get_url(),
-            "offer_id": self.get_offer_id()
+            "offer_id": self.get_offer_id(),
+            "picture": self.get_picture()
         }
         return result

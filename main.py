@@ -60,6 +60,7 @@ assert len(article) > 0, "no offers found."
 offers = list()  # offers container
 for offer in article:
     parsed = OfferParser(offer).get_as_dict()
+    print(parsed["picture"])
     offers.append(Offer(**parsed))
 
 for offer in offers:
