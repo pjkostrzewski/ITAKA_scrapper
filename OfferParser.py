@@ -25,8 +25,11 @@ class OfferParser(object):
             return None
     
     def get_hotel_rank(self):
-        return float(self.offer.find('span', 
-                                     class_='hotel-rank').get_text())
+        try:
+            return float(self.offer.find('span', 
+                                        class_='hotel-rank').get_text())
+        except AttributeError:
+            return 0
     
     def get_url(self):
         return self.offer.find('a', 
