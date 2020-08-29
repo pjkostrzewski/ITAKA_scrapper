@@ -1,6 +1,12 @@
 # ITAKA_scrapper
 best last minute offers from itaka website. 
 
+## Run script? (Python3)
+```
+pip3 install -r requirements.txt
+python3 main.py
+```
+
 # RESULTS
 2589zł -> 1099zł  (-57%)  |  4.6  |  Egipt\
 2589zł -> 1099zł  (-57%)  |  4.7  |  Egipt\
