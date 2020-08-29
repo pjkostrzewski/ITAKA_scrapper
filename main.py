@@ -10,22 +10,27 @@ from helpers import (url, user_agent,
                      get_today_date, get_date_with_timedelta,
                      get_offer_id_from_url)
 
-  
-url = url.format(departure_date=get_date_with_timedelta(days=1), 
+use_proxy = False
+url = url.format(departure_date=get_date_with_timedelta(days=1),
                  date_from=get_today_date())
-
-proxy = Proxy().get()
-print("connected", proxy)
-
 headers = {'User-Agent': user_agent}
-try:
+
+if use_proxy:
+    proxy = Proxy().get()
+    print("connected", proxy)
+    try:
+        response = requests.get(url=url,
+                                headers=headers,
+                                proxies={"http": f"http://{proxy}","https": f"http://{proxy}"}
+                                ).text
+    except ProxyError as e:
+        print(e)
+        response = requests.get(url=url,
+                                headers=headers).text
+else:
     response = requests.get(url=url,
-                            headers=headers, 
-                            proxies={"http": f"http://{proxy}","https": f"http://{proxy}"}).text
-except ProxyError as e:
-    print(e)
-    response = requests.get(url=url,
-                            headers=headers).text
+                            headers=headers
+                            ).text
 
 soup = BeautifulSoup(response, "html.parser")
 article = soup.find_all('article', {'class': "offer clearfix"})
