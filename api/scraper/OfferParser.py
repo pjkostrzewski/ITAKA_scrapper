@@ -38,11 +38,13 @@ class OfferParser(object):
     def get_offer_id(self):
         url = self.get_url()
         return re.findall(pattern=r".*ofr_id=(.{64})&.*", string=url)[0]
-    
+
     def get_picture(self):
-        # return self.offer.find("img", 
-        #                        {'class': "figure_main-photo"}).get('src')  // TODO
+        # return self.offer.find_all("img",
+        #                        {'class': "figure_main-photo"}, recursive=True)
+        print(self)
         return "picture handler"
+    # TODO: use selenium webdriver
     
     def get_as_dict(self):
         result = {

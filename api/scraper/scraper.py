@@ -2,11 +2,10 @@ import requests
 from requests.exceptions import ProxyError
 from bs4 import BeautifulSoup
 import re
-
-from api.proxies import Proxy
-from api.Offer import Offer
-from api.OfferParser import OfferParser
-from api.helpers import (url, user_agent,
+from api.scraper.proxies import Proxy
+from api.scraper.Offer import Offer
+from api.scraper.OfferParser import OfferParser
+from api.scraper.helpers import (url, user_agent,
                      get_today_date, get_date_with_timedelta,
                      get_offer_id_from_url)
 
@@ -49,3 +48,6 @@ def scrap():
 
     print(f"FOUND {Offer.number_of_offers} OFFERS")
     return [vars(offer) for offer in offers]
+
+
+# scrap()
