@@ -44,8 +44,8 @@ def scrap():
         print(parsed["picture"])
         offers.append(Offer(**parsed))
 
-    # for offer in offers:
-    #     print(vars(offer))
+    for offer in offers:
+        print(offer)
 
     print(f"FOUND {Offer.number_of_offers} OFFERS")
     return [vars(offer) for offer in offers]

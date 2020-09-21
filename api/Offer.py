@@ -33,8 +33,7 @@ class Offer(object):
                 self.rank, 
                 self.destination
                 )
-        
-    
+
     def _calculate_reduction(self) -> int:
         return self.old_price - self.current_price if self.old_price else 0
 
