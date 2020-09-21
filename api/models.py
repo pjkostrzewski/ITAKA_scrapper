@@ -24,4 +24,3 @@ class Offer(models.Model):
 
     def __str__(self):
         return '{} {}'.format(self.offer_id, self.destination)
-

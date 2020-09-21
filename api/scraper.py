@@ -49,6 +49,3 @@ def scrap():
 
     print(f"FOUND {Offer.number_of_offers} OFFERS")
     return [vars(offer) for offer in offers]
-
-
-print(scrap())

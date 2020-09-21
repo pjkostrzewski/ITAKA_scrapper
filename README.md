@@ -31,3 +31,14 @@ Technologies: Python 3.8, Django Rest Framework, Celery, BeautifulSoup4
 5209zł -> 3029zł  (-41%)  |  5.5  |  Wyspy Kanaryjskie\
 5109zł -> 3129zł  (-38%)  |  5.8  |  Wyspy Kanaryjskie\
 5349zł -> 3199zł  (-40%)  |  5.5  |  Madera
+
+# EXAMPLE JSON VIEW
+
+{\
+        "offer_id": "78fbc334d4f2958de8f4ffdb300b60adb4cb0456687f6068fee0b12d6690e6d0",\
+        "destination": "Grecja",\
+        "old_price": 3689,\
+        "current_price": 1099,\
+        "rank": 4.7,\
+        "link": <link\>\
+    },
