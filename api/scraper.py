@@ -51,4 +51,4 @@ def scrap():
     return [vars(offer) for offer in offers]
 
 
-# print(scrap())
+print(scrap())
