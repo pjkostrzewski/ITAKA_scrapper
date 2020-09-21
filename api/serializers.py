@@ -1,8 +1,13 @@
-from rest_framework.serializers import ModelSerializer, SerializerMethodField
+from rest_framework.serializers import ModelSerializer, SlugRelatedField
 from .models import Offer
 
 
 class OfferSerializer(ModelSerializer):
+    destination = SlugRelatedField(
+        read_only=True,
+        slug_field='name'
+     )
+
     class Meta:
         model = Offer
         fields = (
@@ -12,6 +17,6 @@ class OfferSerializer(ModelSerializer):
             'current_price',
             'rank',
             'link',
-            'photo',
-            'date'
+            # 'photo',
+            # 'date'
         )
