@@ -8,6 +8,7 @@ from api.scraper.OfferParser import OfferParser
 from api.scraper.helpers import (url, user_agent,
                      get_today_date, get_date_with_timedelta,
                      get_offer_id_from_url)
+from time import sleep
 
 
 def scrap():
