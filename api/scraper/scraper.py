@@ -9,6 +9,10 @@ from api.scraper.helpers import (url, user_agent,
                      get_today_date, get_date_with_timedelta,
                      get_offer_id_from_url)
 from time import sleep
+from api.scraper.images import get_photos_urls
+
+
+chromedriver_path = "/Users/patrykkostrzewski/Downloads/chromedriver"
 
 
 def scrap():
@@ -39,16 +43,15 @@ def scrap():
     assert len(article) > 0, "no offers found."
 
     offers = list()
-    for offer in article:
+    photos = get_photos_urls(chromedriver_path=chromedriver_path, url=_url)
+    for offer, photo in zip(article, photos):
         parsed = OfferParser(offer).get_as_dict()
-        print(parsed["picture"])
+        parsed["picture"] = photo
         offers.append(Offer(**parsed))
-
     for offer in offers:
         print(offer)
-
     print(f"FOUND {Offer.number_of_offers} OFFERS")
     return [vars(offer) for offer in offers]
 
 
-# scrap()
+# print(scrap())
