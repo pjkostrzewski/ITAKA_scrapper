@@ -44,6 +44,7 @@ def scrap():
 
     offers = list()
     photos = get_photos_urls(chromedriver_path=chromedriver_path, url=_url)
+    assert len(article) == len(photos), "numbers of offers and pictures are not equal."
     for offer, photo in zip(article, photos):
         parsed = OfferParser(offer).get_as_dict()
         parsed["picture"] = photo
@@ -54,4 +55,4 @@ def scrap():
     return [vars(offer) for offer in offers]
 
 
-# print(scrap())
+print(scrap())
