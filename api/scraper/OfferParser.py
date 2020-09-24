@@ -12,7 +12,7 @@ class OfferParser(object):
             price = self.offer.find('span', 
                                     class_='old-price_value').get_text()
             return int(re.findall(r'(.*) PLN\/os', price)[0].replace(" ", ""))
-        except:
+        except Exception as e:
             return None
         
     def get_current_price(self):
@@ -39,13 +39,10 @@ class OfferParser(object):
         url = self.get_url()
         return re.findall(pattern=r".*ofr_id=(.{64})&.*", string=url)[0]
 
-    def get_picture(self):
-        # return self.offer.find_all("img",
-        #                        {'class': "figure_main-photo"}, recursive=True)
-        print(self)
-        return "picture handler"
-    # TODO: use selenium webdriver
-    
+    @staticmethod
+    def get_picture():
+        return None
+
     def get_as_dict(self):
         result = {
             "old_price": self.get_old_price(),

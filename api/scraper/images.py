@@ -3,7 +3,7 @@ from selenium import webdriver
 
 def _scroll_down_page(driver, speed=8):
     # browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-    current_scroll_position, new_height= 0, 1
+    current_scroll_position, new_height = 0, 1
     while current_scroll_position <= new_height:
         current_scroll_position += speed
         driver.execute_script("window.scrollTo(0, {});".format(current_scroll_position))

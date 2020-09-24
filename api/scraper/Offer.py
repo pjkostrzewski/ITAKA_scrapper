@@ -12,9 +12,6 @@ class Offer(object):
         self.rank = rank
         self.link = link
         self.picture = picture
-        self.reduction = self._calculate_reduction()
-        self.percentage = self._calculate_percentage()
-        self.destination = self._get_destination()
         
         Offer.number_of_offers += 1
     
@@ -34,14 +31,17 @@ class Offer(object):
                 self.destination
                 )
 
-    def _calculate_reduction(self) -> int:
+    @property
+    def reduction(self) -> int:
         return self.old_price - self.current_price if self.old_price else 0
 
-    def _calculate_percentage(self) -> int:
+    @property
+    def percentage(self) -> int:
         if not self.old_price:
             return 0
         ratio = self.current_price / self.old_price
         return -int((1 - ratio) * 100)
-    
-    def _get_destination(self) -> str:
+
+    @property
+    def destination(self) -> str:
         return self.link.split("/")[2].replace("-", " ").title()
