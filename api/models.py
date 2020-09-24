@@ -19,7 +19,7 @@ class Offer(models.Model):
     current_price = models.IntegerField(validators=[MaxValueValidator(old_price)])
     rank = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(6.0)])
     link = models.URLField(max_length=200)
-    # photo = models.URLField(max_length=200)
+    photo = models.URLField(max_length=200)
     # date = models.DateTimeField()
 
     def __str__(self):
