@@ -123,3 +123,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CELERY_BEAT_SCHEDULE = {
+    "scheduled_task": {
+        "task": "api.tasks.send_email",
+        "schedule": 5.0,  # every 5 seconds
+        "args": ('pjkostrzewski@gmail.com', 'This is sample message.')
+    }
+}

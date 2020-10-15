@@ -16,15 +16,19 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
 
-app.conf.beat_schedule = {
-    'add-every-5-seconds': {
-        'task': 'api.tasks.send_email',
-        'schedule': 1.0,
-        'args': ('pjkostrzewski@gmail.com', 'This is sample message.')
-    }
-}
+
+# Second way to beat schedule
+
+# app.conf.beat_schedule = {
+#     'add-every-5-seconds': {
+#         'task': 'api.tasks.send_email',
+#         'schedule': 1.0,
+#         'args': ('pjkostrzewski@gmail.com', 'This is sample message.')
+#     }
+# }
 
 app.conf.timezone = 'UTC'
+
 
 @app.task(bind=True)
 def debug_task(self):

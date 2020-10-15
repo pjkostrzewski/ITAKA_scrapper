@@ -9,6 +9,11 @@ Technologies: Python 3.8, Django Rest Framework, Celery, BeautifulSoup4
 - [ ] frontend
 
 
+# Celery
+`celery -A rest2 worker -l INFO --pool=solo`\
+`celery -A rest2 beat -l INFO`
+
+
 # RESULTS
 3689zł -> 1099zł  (-70%)  |  4.7  |  Grecja\
 3739zł -> 1199zł  (-67%)  |  4.5  |  Grecja\
