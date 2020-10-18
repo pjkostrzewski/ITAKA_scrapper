@@ -5,12 +5,12 @@ import time
 
 
 @shared_task
-def send_email(email_id, message):
+def send_email(email, message):
     """
     easy function to understand how celery works
-    :param email_id:
+    :param email:
     :param message:
     :return:
     """
-    time.sleep(10)
-    print(f"Email is sent to {email_id}. Message sent was - {message}")
+    time.sleep(12)
+    print("Email sent to {}. Message sent was - '{}'".format(email, message))
