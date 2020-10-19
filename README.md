@@ -4,7 +4,7 @@ Technologies: Python 3.8, Django Rest Framework, Celery, BeautifulSoup4
 
 - [X] data scraper
 - [X] REST API
-- [ ] periodic task to update data (Celery)
+- [X] periodic task to update data (Celery)
 - [ ] Docker
 - [ ] frontend
 
